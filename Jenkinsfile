@@ -69,7 +69,7 @@ pipeline {
                 script{
 				    withCredentials([string(credentialsId: 'dockerhub_cred', variable:'dockerhub_cred')]) {
 		                sh 'echo ${dockerhub_cred} | docker login -u anasdaoud15 --password-stdin'
-		                sh 'docker push anasdaoud15/station-ski'
+		                // sh 'docker push anasdaoud15/station-ski'
 				    }
                 }
 
