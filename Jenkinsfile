@@ -34,21 +34,19 @@ pipeline {
 
         } 
 
-        stage('Sonarqube') { 
-
-            steps { 
-
-                sh 'mvn sonar:sonar -Dsonar.login=sonar -Dsonar.password=sonar' 
-
-            } 
-
-        } 
+	stage('SonarQube tests') {
+             steps {
+                withSonarQubeEnv('sonar') {
+                     sh "mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000"
+                 }
+            }
+        }
 
         stage('Nexus Deployment') { 
 
             steps { 
 
-                sh 'mvn deploy -DskipTests' 
+                sh "mvn deploy -U -DaltDeploymentRepository=deploymentRepo::default::http://nexus:8081/repository/maven-releases/ -DskipTests=true"
 
             } 
 
