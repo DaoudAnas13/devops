@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: stationSki
+      MYSQL_USER: devops
+      MYSQL_PASSWORD: devops
+  backend:
+    image: anasdaoud15/station-ski
+    ports:
+      - "8089:8089"
+    depends_on:
+      - db
+    restart: always
